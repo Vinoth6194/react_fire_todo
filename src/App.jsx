@@ -1,12 +1,13 @@
 import "./App.css";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "./firebase_config";
 import firebase from "firebase";
 
 function App() {
   const [todoInput, setTodoInput] = useState("");
+  const [todos, setTodos] = useState([]);
   const addTodo = (e) => {
     e.preventDefault();
     console.log("Button is clicked");
@@ -17,6 +18,21 @@ function App() {
       todo: todoInput,
     });
     setTodoInput("");
+  };
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+  const getTodos = () => {
+    db.collection("todos").onSnapshot((querySnapshot) => {
+      setTodos(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          todo: doc.data().todo,
+          inprogress: doc.data().inprogress,
+        }))
+      );
+    });
   };
   return (
     <div className="App">
@@ -43,6 +59,9 @@ function App() {
           Primary
         </Button>
       </form>
+      {todos.map((todo) => (
+        <p>{todo.todo}</p>
+      ))}
     </div>
   );
 }
