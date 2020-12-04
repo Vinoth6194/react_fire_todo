@@ -10,7 +10,7 @@ function TodoListItem({ todo, inprogress, id }) {
           secondary={inprogress ? "In Progress" : "Completed"}
         ></ListItemText>
       </ListItem>
-      <Button>Done</Button>
+      <Button>{inprogress ? "Done" : "UnDone"}</Button>
       <Button>X</Button>
     </div>
   );
