@@ -26,6 +26,8 @@ function App() {
           }}
         />
         <Button
+          style={{ display: "none" }}
+          className="btn_hide"
           variant="contained"
           color="primary"
           onClick={addTodo}
