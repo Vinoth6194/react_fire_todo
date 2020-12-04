@@ -40,6 +40,7 @@ function App() {
       <h1>Vinothkumar's Todo App 🔥 🔥 </h1>
       <form>
         <TextField
+          className="text_field"
           id="standard-basic"
           label="Vin's Todo"
           className="todo_field"
@@ -60,13 +61,15 @@ function App() {
           Primary
         </Button>
       </form>
-      {todos.map((todo) => (
-        <TodoListItem
-          todo={todo.todo}
-          id={todo.id}
-          inprogress={todo.inprogress}
-        ></TodoListItem>
-      ))}
+      <div className="todo_field">
+        {todos.map((todo) => (
+          <TodoListItem
+            todo={todo.todo}
+            id={todo.id}
+            inprogress={todo.inprogress}
+          ></TodoListItem>
+        ))}
+      </div>
     </div>
   );
 }

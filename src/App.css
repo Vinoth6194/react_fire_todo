@@ -8,9 +8,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .todo_field {
-  max-width: 300px;
+  max-width: 500px;
   width: 90vw;
+  margintop: 24px;
+}
+.text_field {
+  width: 90vw;
+  max-width: 500px;
 }
