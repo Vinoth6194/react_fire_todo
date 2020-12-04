@@ -43,7 +43,6 @@ function App() {
           className="text_field"
           id="standard-basic"
           label="Vin's Todo"
-          className="todo_field"
           value={todoInput}
           onChange={(e) => {
             setTodoInput(e.target.value);
@@ -61,7 +60,7 @@ function App() {
           Primary
         </Button>
       </form>
-      <div className="todo_field">
+      <div className="app__todos">
         {todos.map((todo) => (
           <TodoListItem
             todo={todo.todo}
