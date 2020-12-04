@@ -8,6 +8,10 @@ function TodoListItem({ todo, inprogress, id }) {
       inprogress: !inprogress,
     });
   };
+
+  const deleteTodo = () => {
+    db.collection("todos").doc(id).delete();
+  };
   return (
     <div style={{ display: "flex" }}>
       <ListItem>
@@ -17,7 +21,7 @@ function TodoListItem({ todo, inprogress, id }) {
         ></ListItemText>
       </ListItem>
       <Button onClick={statusToggle}>{inprogress ? "Done" : "UnDone"}</Button>
-      <Button>X</Button>
+      <Button onClick={deleteTodo}>X</Button>
     </div>
   );
 }
