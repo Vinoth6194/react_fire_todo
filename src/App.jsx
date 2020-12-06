@@ -5,10 +5,19 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase_config";
 import firebase from "firebase";
 import TodoListItem from "./TodoListItem";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [todoInput, setTodoInput] = useState("");
   const [todos, setTodos] = useState([]);
+  const sucToaster = () => {
+    toast.success("Todo added", {
+      position: "top-right",
+      autoClose: 5000,
+      draggable: true,
+    });
+  };
   const addTodo = (e) => {
     e.preventDefault();
     console.log("Button is clicked");
@@ -19,6 +28,7 @@ function App() {
       todo: todoInput,
     });
     setTodoInput("");
+    sucToaster();
   };
 
   useEffect(() => {
@@ -38,6 +48,8 @@ function App() {
   return (
     <div className="App">
       <h1>Vinothkumar's Todo App 🔥 🔥 </h1>
+      <ToastContainer></ToastContainer>
+
       <form>
         <TextField
           className="text_field"
