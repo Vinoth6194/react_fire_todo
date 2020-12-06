@@ -1,6 +1,8 @@
 import { Button, ListItem, ListItemText } from "@material-ui/core";
 import React from "react";
 import { db } from "./firebase_config";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TodoListItem({ todo, inprogress, id }) {
   const statusToggle = () => {
@@ -8,12 +10,21 @@ function TodoListItem({ todo, inprogress, id }) {
       inprogress: !inprogress,
     });
   };
-
+  const delToaster = () => {
+    toast.warn("Todo Deleted ", {
+      position: "top-right",
+      autoClose: 5000,
+      draggable: true,
+    });
+  };
   const deleteTodo = () => {
     db.collection("todos").doc(id).delete();
+    delToaster();
   };
   return (
     <div style={{ display: "flex" }}>
+      <ToastContainer></ToastContainer>
+
       <ListItem>
         <ListItemText
           primary={todo}
