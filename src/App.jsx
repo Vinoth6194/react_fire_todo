@@ -25,15 +25,17 @@ function App() {
     getTodos();
   }, []);
   const getTodos = () => {
-    db.collection("todos").onSnapshot((querySnapshot) => {
-      setTodos(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          todo: doc.data().todo,
-          inprogress: doc.data().inprogress,
-        }))
-      );
-    });
+    db.collection("todos")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((querySnapshot) => {
+        setTodos(
+          querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            todo: doc.data().todo,
+            inprogress: doc.data().inprogress,
+          }))
+        );
+      });
   };
   return (
     <div className="App">
