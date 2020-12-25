@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { db } from "./firebase_config";
 import firebase from "firebase";
 import TodoListItem from "./TodoListItem";
+import FlipMove from "react-flip-move";
 
 function App() {
   const [todoInput, setTodoInput] = useState("");
@@ -33,6 +34,7 @@ function App() {
             id: doc.id,
             todo: doc.data().todo,
             inprogress: doc.data().inprogress,
+            // data: doc.data(),
           }))
         );
       });
@@ -63,13 +65,16 @@ function App() {
         </Button>
       </form>
       <div className="app__todos">
-        {todos.map((todo) => (
-          <TodoListItem
-            todo={todo.todo}
-            id={todo.id}
-            inprogress={todo.inprogress}
-          ></TodoListItem>
-        ))}
+        <FlipMove>
+          {todos.map(({ id, todo, inprogress }) => (
+            <TodoListItem
+              key={id}
+              todo={todo}
+              id={id}
+              inprogress={inprogress}
+            ></TodoListItem>
+          ))}
+        </FlipMove>
       </div>
     </div>
   );
